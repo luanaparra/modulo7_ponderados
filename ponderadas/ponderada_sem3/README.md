@@ -75,24 +75,23 @@ Seguem abaixo algumas imagens da interface, considerando tela de login, feedback
 └───docker-compose
 ```
 #### /backend
-- **config**: Arquivos de configuração da aplicação, como da conexão com o banco de dados
+- **config**: Configurações da aplicação
 - **controllers**: Controladores que preparam o input do usuário para os serviços
-- **middlewares**: Middlewares da aplicação (autenticação, validação, erros, etc.).
-- **models**: Definições dos modelos de dados.
-- **routes**: Definições das rotas da aplicação.
+- **middlewares**: Middlewares da aplicação
+- **models** e **routes**: Definições dos modelos de dados e rotas da app
 - **services**: Regras de negócio com manipulação direta do banco de dados
 
 #### /frontend
-- **.next**: Artefatos de construção do Next.js.
-- **app**: Módulos ou seções do frontend (signUp, tasks, etc.).
-- **components**: Componentes reutilizáveis.
-- **context**: Gerenciamento de estado global da aplicação, principalmente de autenticação
-- **public**: Ativos estáticos públicos (imagens, ícones, CSS não processados, etc.).
+- **.next**: Artefatos de construção do Next.js
+- **app**: Módulos ou seções do frontend
+- **components**: Componentes reutilizáveis
+- **context**: Gerenciamento de estado global da aplicação
+- **public**: Ativos estáticos públicos
 
 # Execução
 Para executar a aplicação, siga os seguintes passos:
 1. Instalação do Docker e Docker Compose
 2. Navegar até a pasta raiz do projeto pelo CMD
-3. Executar o comando `docker-compose up``
+3. Executar o comando `docker-compose up`
 4. É esperado que as imagens sejam baixadas do DockerHub e os contêineres sejam criados
 5. Acesse http://localhost:3000 para começar a usar a aplicação
