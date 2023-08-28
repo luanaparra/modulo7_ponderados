@@ -43,6 +43,13 @@ frontend: Contêiner é baseado na imagem Next.js Alpine, é o frontend da aplic
 
 <img src='docker-compose-up-sem3.png'>
 
+**Banco de dados**
+O banco de dados é composto por duas tabelas relacionadas:
+
+tasks: Armazena informações sobre as tarefas (título, estado de conclusão e referência ao usuário através do campo user_id, possui timestamps de criação e atualização).
+
+users: Armazena informações dos usuários (email, senha e timestamps de criação e atualização, possui uma chave primária).
+
 **Funcionalidades da aplicação**
 - Criação de usuário
 - Login e Logout
@@ -55,45 +62,19 @@ Todas essas operações são realizadas através de rotas protegidas que exigem 
 
 Seguem abaixo algumas imagens da interface, considerando tela de login, feedback de login incorreto, tela de criação de conta e tela de tarefas com atualização.
 
-<img src='login.png'>
-<img src='loginIncorreto.png'>
-<img src='criarConta.png'>
-<img src='tarefas.png'>
-<img src='alterandoTarefas.png'>
-
-
-## Banco de dados
-<img src='db.png'>
-
-O banco de dados é composto por duas tabelas relacionadas:
-
-users: Armazena informações dos usuários, incluindo um email, senha e timestamps de criação e atualização. Possui uma chave primária.
-
-tasks: Armazena informações sobre as tarefas, incluindo título, estado de conclusão e referência ao usuário através do campo user_id. Também possui timestamps de criação e atualização.
+<img src='imagem1.png'>
+<img src='imagem2.png'>
+<img src='imagem3.png'>
+<img src='imagem4.png'>
 
 ## Estrutura de pastas
 
 ```
-├───backend
-│   ├───config
-│   ├───controllers
-│   ├───db
-│   ├───middlewares
-│   ├───models
-│   ├───routes
-│   └───services
-└───frontend
-    ├───.next
-    ├───app
-    │   ├───signUp
-    │   └───tasks
-    ├───components
-    ├───context
-    └───public
+├───/backend
+├───/frontend 
+└───docker-compose
 ```
-
-### Backend (MVC)
-
+#### /backend
 - **config**: Arquivos de configuração da aplicação, como da conexão com o banco de dados
 - **controllers**: Controladores que preparam o input do usuário para os serviços
 - **middlewares**: Middlewares da aplicação (autenticação, validação, erros, etc.).
@@ -101,21 +82,17 @@ tasks: Armazena informações sobre as tarefas, incluindo título, estado de con
 - **routes**: Definições das rotas da aplicação.
 - **services**: Regras de negócio com manipulação direta do banco de dados
 
-Na pasta raiz, existem também os arquivos app.js e index.js. O index.js é o ponto de entrada, enquanto o app.js apenas cria o objeto de app no express e define as rotas. O index.js também inicializa o banco de dados através da importação dos arquivos de configuração.
-
-### Frontend
-
+#### /frontend
 - **.next**: Artefatos de construção do Next.js.
 - **app**: Módulos ou seções do frontend (signUp, tasks, etc.).
 - **components**: Componentes reutilizáveis.
 - **context**: Gerenciamento de estado global da aplicação, principalmente de autenticação
 - **public**: Ativos estáticos públicos (imagens, ícones, CSS não processados, etc.).
 
-## Executando a aplicação
+# Execução
 Para executar a aplicação, siga os seguintes passos:
-
-- Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
-- Navegue até a pasta raiz do projeto no terminal.
-- Execute o comando `docker-compose up``.
-- Aguarde até que as imagens sejam baixadas do DockerHub e os contêineres sejam criados.
-- Abra um navegador e acesse http://localhost:3000 para começar a usar a aplicação.
+1. Instalação do Docker e Docker Compose
+2. Navegar até a pasta raiz do projeto pelo CMD
+3. Executar o comando `docker-compose up``
+4. É esperado que as imagens sejam baixadas do DockerHub e os contêineres sejam criados
+5. Acesse http://localhost:3000 para começar a usar a aplicação
