@@ -1,11 +1,36 @@
-# Ponderada II
+# Atividade 2
 
-Esta é uma aplicação web de lista de tarefas (To-Do List) que foi containerizada e construída usando tecnologias como Docker e Docker Compose. A aplicação permite que os usuários realizem autenticação, registrem itens em um banco de dados e gerenciem suas tarefas pessoais. Abaixo estão os detalhes sobre a aplicação, sua arquitetura e como executá-la.
+Esta atividade tem por objetivo desenvolver um projeto web que possibilite os usuários registrarem dados em um banco de dados. O deploy do banco, da API do backend e do frontend deve acontecer utilizando uma aplicação com multiplos containers. A aplicação não precisa utilizar frameworks, pode ser realizada utilizando os primitivos presentes na linguagem de programação escolhida.
 
-## Objetivo
-O objetivo deste projeto era desenvolver uma aplicação de lista de tarefas (To-Do List) que incluísse autenticação de usuário e armazenamento de itens em um banco de dados. A aplicação foi containerizada usando Docker e Docker Compose para facilitar a implantação e a execução em diferentes ambientes.
+#### Divisão do projeto em containers:
+Para os projetos que vão trabalhar com 2 containers:
+- Container da aplicação (interface e backend);
+- Container do banco de dados.
 
-## Arquitetura
+Para os projetos que vão trabalhar com 3 containers:
+- Container da interface com o usuário (frontend da aplicação);
+- Container do sistema de API (backend da aplicação);
+- Container do banco de dados.
+
+A escolha de uma das estratégias está totalmente vinculada a experiência que o estudante deseja praticar. De qualquer forma, será encessário justificar a escolha da arquitetura utilizada para a solução. 
+
+#### Espera-se encontrar na entrega do projeto:
+1. Arquitetura da solução utilizada (no arquivo README do projeto) e a justificativa de sua escolha;
+2. Um arquivo docker-compose para o lançamento da aplicação;
+3. Instruções para lançar a aplicação;
+4. Instruções para utilizar a aplicação;
+5. Uma descrição da estrutura de dados utilizada para armazenar os dados no banco de dados;
+6. Uma tela de login para entrar no sistema;
+7. Uma tela para ver os dados cadastrados;
+8. Uma tela para cadastrar novas entradas de dados.
+
+O projeto consiste em um TODO List, onde o usuário deve se cadastrar no sistema (considerar o usuário teste, com a senha teste123) para ter acesso a suas notas e adicionar novas notas. NÃO É NECESSÁRIO REALIZAR A IMPLEMENTAÇÃO DE CADASTRO DE USUÁRIOS OU TELA/FUNCIONALIDADE DE RECUPERAÇÃO DE SENHA.
+
+A imagem do banco de dados que será utilizada pode ser de qualquer banco de dados RELACIONAL. A aplicação pode ser desenvolvida em Python ou em JavaScript.
+
+Exemplos de aplicação do tipo TODO List: todoist, Any.do, Google Keep
+
+# Arquitetura
 
 <img src='arquitetura.png'>
 
