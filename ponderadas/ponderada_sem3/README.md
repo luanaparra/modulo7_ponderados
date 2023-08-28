@@ -46,9 +46,9 @@ frontend: Contêiner é baseado na imagem Next.js Alpine, é o frontend da aplic
 **Banco de dados**
 O banco de dados é composto por duas tabelas relacionadas:
 
-tasks: Armazena informações sobre as tarefas (título, estado de conclusão e referência ao usuário através do campo user_id, possui timestamps de criação e atualização).
+tarefa: Armazena informações sobre as tarefas (título, estado de conclusão e referência ao usuário através do campo user_id, possui timestamps de criação e atualização).
 
-users: Armazena informações dos usuários (email, senha e timestamps de criação e atualização, possui uma chave primária).
+usuario: Armazena informações dos usuários (email, senha e timestamps de criação e atualização, possui uma chave primária).
 
 **Funcionalidades da aplicação**
 - Criação de usuário
@@ -86,7 +86,6 @@ Seguem abaixo algumas imagens da interface, considerando tela de login, feedback
 - **app**: Módulos ou seções do frontend
 - **components**: Componentes reutilizáveis
 - **context**: Gerenciamento de estado global da aplicação
-- **public**: Ativos estáticos públicos
 
 # Execução
 Para executar a aplicação, siga os seguintes passos:
