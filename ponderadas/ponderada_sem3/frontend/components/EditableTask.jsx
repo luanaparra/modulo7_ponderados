@@ -1,15 +1,12 @@
-import { useState } from "react";
-import { FiEdit } from "react-icons/fi";
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { LiaSave } from "react-icons/lia";
-import { useContext } from "react";
+import { useState, useCallback, useContext } from "react";
+import { FiEdit, MdOutlineDeleteOutline } from "react-icons/all";
 import { AuthContext } from "../context/AuthContext";
-function EditableTask({ task, onUpdate, onDelete, fetchTasks }) {
-  console.log(task.completed);
+
+function EditableTask({ task, onUpdate, onDelete }) {
   const { authState } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(task.text);
-  const [checked, setChecked] = useState(task.completed);
+  const [isChecked, setIsChecked] = useState(task.completed);
 
   const handleInputChange = (event) => {
     setEditedText(event.target.value);
@@ -17,24 +14,38 @@ function EditableTask({ task, onUpdate, onDelete, fetchTasks }) {
 
   const handleSaveClick = () => {
     if (editedText !== task.text) {
-      onUpdate(task.id, editedText, checked);
+      onUpdate(task.id, editedText, isChecked);
     }
     setIsEditing(false);
   };
 
-  async function updateStatus(e) {
-    setChecked(e);
-    onUpdate(task.id, editedText, e);
-  }
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleDeleteClick = () => {
+    onDelete(task.id);
+  };
+
+  const updateStatus = (checked) => {
+    setIsChecked(checked);
+    onUpdate(task.id, editedText, checked);
+  };
+
+  const IconWrapper = ({ onClick, icon: Icon }) => (
+    <button onClick={onClick}>
+      <Icon />
+    </button>
+  );
 
   return (
     <div className="text-gray-500 text-lg flex items-center justify-between gap-2">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center gap-2">
         <input
           type="checkbox"
           id={task.id}
           name={task.id}
-          checked={checked}
+          checked={isChecked}
           onChange={(e) => updateStatus(e.target.checked)}
         />
         {isEditing ? (
@@ -45,17 +56,11 @@ function EditableTask({ task, onUpdate, onDelete, fetchTasks }) {
       </div>
       <div>
         {isEditing ? (
-          <button onClick={handleSaveClick}>
-            <LiaSave />
-          </button>
+          <IconWrapper onClick={handleSaveClick} icon={LiaSave} />
         ) : (
           <>
-            <button onClick={() => setIsEditing(true)}>
-              <FiEdit />
-            </button>
-            <button onClick={() => onDelete(task.id)}>
-              <MdOutlineDeleteOutline />
-            </button>
+            <IconWrapper onClick={handleEditClick} icon={FiEdit} />
+            <IconWrapper onClick={handleDeleteClick} icon={MdOutlineDeleteOutline} />
           </>
         )}
       </div>

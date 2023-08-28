@@ -1,5 +1,4 @@
-# É o responsável por assinar, decodificar, codificar e retornar os JWTs.
-# Cada JWT deve possuir um tempo de vida, assim a biblioteca time é utilizada para criar esse controle de tempo
+
 import time
 import jwt
 # Realiza a leitura de arquivos de ambiente

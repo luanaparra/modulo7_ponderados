@@ -1,48 +1,37 @@
-'use client'
-
 import { createContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const AuthContext = createContext();
 const { Provider } = AuthContext;
 
+const TOKEN_STORAGE_KEY = "token";
+
 const AuthProvider = ({ children }) => {
   const router = useRouter();
 
-  const [authState, setAuthState] = useState({
-    token: "",
-  });
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log(token);
-    if (token) {
-      setAuthState({
-        token,
-      });
+    const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (storedToken) {
+      setToken(storedToken);
     }
   }, []);
 
   const setUserAuthInfo = (data) => {
-    const token = data.token;
-    localStorage.setItem("token", token);
-
-    setAuthState({
-      token,
-    });
+    const newToken = data.token;
+    localStorage.setItem(TOKEN_STORAGE_KEY, newToken);
+    setToken(newToken);
   };
 
-  function isUserAuthenticated() {
-    return !!authState.token;
-  };
+  const isUserAuthenticated = () => !!token;
 
   return (
     <Provider
       value={{
-        authState,
-        setUserAuthInfo: setUserAuthInfo,
-        isUserAuthenticated,
-        setAuthState
+        token,
+        setUserAuthInfo,
+        isUserAuthenticated
       }}
     >
       {children}

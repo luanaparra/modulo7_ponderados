@@ -7,11 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-     colors: {
+      colors: {
         'navyblue': '#002D40',
         'green': '#62FFD0'
-     }
+      }
     },
   },
-  plugins: [],
-}
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};

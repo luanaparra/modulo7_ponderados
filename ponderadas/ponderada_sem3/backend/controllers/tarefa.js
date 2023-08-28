@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const taskServices = require('../services/task');
+const taskServices = require('../services/tarefa');
 
 const getTasks = async (req, res) => {
     const tasks = await taskServices.getTasks(req.user_id);
