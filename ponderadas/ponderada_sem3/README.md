@@ -31,22 +31,19 @@ A imagem do banco de dados que será utilizada pode ser de qualquer banco de dad
 Exemplos de aplicação do tipo TODO List: todoist, Any.do, Google Keep
 
 # Arquitetura
-
-<img src='arquitetura.png'>
-
 A arquitetura da aplicação envolve três contêineres customizados, que são construídos, executados e conectados usando o Docker Compose:
 
-banco-db: Este contêiner utiliza a base de dados PostgreSQL. Ele configura as variáveis de ambiente necessárias e expõe a porta 5432 para a comunicação com o banco de dados.
+<img src='arquitetura-sem3.png'>
 
-backend: Este contêiner é baseado na imagem Node Alpine. Ele serve como o backend da aplicação, desenvolvido em Node.js. Ele expõe a porta 5000 para a comunicação com o frontend e o acesso às APIs da aplicação. Está disponível em https://hub.docker.com/repository/docker/elisaflemer/todobackend/general.
+banco-db: Contêiner que utiliza a base de dados PostgreSQL, configura as variáveis de ambiente necessárias e expõe a porta 5432 para a comunicação com o banco de dados.
 
-frontend: Este contêiner é baseado na imagem Next.js Alpine. Ele é o frontend da aplicação, desenvolvido em Next.js (baseado em React). O contêiner expõe a porta 3000 para que os usuários possam acessar a interface da aplicação. stá disponível em https://hub.docker.com/repository/docker/elisaflemer/todofrontend/general.
+backend: Contêiner baseado na imagem Node Alpine, servindo como o backend da aplicação, desenvolvido em Node.js, ele expõe a porta 5000 para a comunicação com o frontend e o acesso às APIs da aplicação.
 
-A escolha dessa arquitetura foi feita por diversas razões: o PostgreSQL foi escolhido para o banco de dados devido à facilidade de lidar com bancos relacionais containerizados; Node.js foi usado para o backend devido à familiaridade do desenvolvedor e a escolha de implementar autenticação no formato Modelo-Visão-Controlador (MVC) com o framework Express; e Next.js foi escolhido para o frontend devido ao uso do React e à facilidade de criação de rotas e utilização do Tailwind CSS.
+frontend: Contêiner é baseado na imagem Next.js Alpine, é o frontend da aplicação, desenvolvido em Next.js (baseado em React) e expõe a porta 3000 para que os usuários possam acessar a interface da aplicação.
 
-## Funcionalidades da aplicação
-A aplicação To-Do List oferece as seguintes funcionalidades:
+<img src='docker-compose-up-sem3.png'>
 
+**Funcionalidades da aplicação**
 - Criação de usuário
 - Login e Logout
 - Criação de tarefas
