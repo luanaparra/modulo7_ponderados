@@ -5,7 +5,7 @@ const client = new Client({
   host: "banco-db",
   database: "postgres",
   password: "postgres",
-  port: 5432, // Default PostgreSQL port
+  port: 5432, 
 });
 
 const connectDB = async () => {

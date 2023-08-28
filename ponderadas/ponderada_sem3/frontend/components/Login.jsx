@@ -36,7 +36,7 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 w-80 relative">
       <div className="flex flex-col items-center justify-center gap-5 w-80 relative">
-        <div className="bg-lila w-full shadow-md py-2 px-6 text-center text-white font-semibold">
+        <div className="bg-green w-full shadow-md py-2 px-6 text-center text-white font-semibold">
           Login
         </div>
         <div className="bg-white flex flex-col pt-8 pb-12 px-10 gap-10 w-full shadow-md text-sm">
@@ -61,7 +61,7 @@ const Login = () => {
           </form>
         </div>
         <button
-          className="bg-lila absolute -bottom-5 py-3 px-6 rounded-full text-white font-semibold"
+          className="bg-green absolute -bottom-5 py-3 px-6 rounded-full text-white font-semibold"
           onClick={handleLogin}
         >
           Login

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  frontend:
+    image: luanaparra/sem3-frontend:1.0  
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  banco-db:
+    image: postgres:latest
+    container_name: banco-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  backend:
+    image: luanaparra/sem3-backend:1.0  
+    container_name: backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - banco-db

@@ -1,15 +1,3 @@
-/* 
-ERROR STRUCTURE
-{
-    error: {
-        message:
-        details :{
-
-        }
-    }
-}
-*/
-
 const errorHandler = (err, req, res, next) => {
     const errorObject = {
         message: undefined,

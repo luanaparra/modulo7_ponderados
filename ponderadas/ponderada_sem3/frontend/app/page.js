@@ -17,7 +17,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-lightpurple w-full h-screen justify-center items-center flex">
+    <div className="bg-navyblue w-full h-screen justify-center items-center flex">
       <Login />
     </div>
   );

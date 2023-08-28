@@ -1,17 +1,11 @@
 const { validationResult } = require('express-validator');
 const taskServices = require('../services/task');
 
-// @desc Get tasks
-// @route GET /api/tasks
-// @access Private
 const getTasks = async (req, res) => {
     const tasks = await taskServices.getTasks(req.user_id);
     return res.status(200).json({ tasks });
 }
 
-// @desc Create tasks
-// @route POST /api/tasks
-// @access Private
 const createTask = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

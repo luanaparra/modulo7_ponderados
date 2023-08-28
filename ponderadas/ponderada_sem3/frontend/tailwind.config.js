@@ -9,7 +9,7 @@ module.exports = {
     extend: {
      colors: {
         'lightpurple': '#E3E9FF',
-        'lila': '#AF7EEB'
+        'lila': '#6CF6DD'
      }
     },
   },
