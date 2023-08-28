@@ -86,7 +86,6 @@ Seguem abaixo algumas imagens da interface, considerando tela de login, feedback
 - **app**: Módulos ou seções do frontend
 - **components**: Componentes reutilizáveis
 - **context**: Gerenciamento de estado global da aplicação
-- **public**: Ativos estáticos públicos
 
 # Execução
 Para executar a aplicação, siga os seguintes passos:
