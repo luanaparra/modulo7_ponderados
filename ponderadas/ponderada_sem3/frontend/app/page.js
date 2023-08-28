@@ -12,7 +12,6 @@ export default function Home() {
 
   useEffect(() => {
     console.log(isUserAuthenticated())
-    // checks if the user is authenticated
     isUserAuthenticated() ? router.push("/tasks") : router.push("/");
   }, []);
 

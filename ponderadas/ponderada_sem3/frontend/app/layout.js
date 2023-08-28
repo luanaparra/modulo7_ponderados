@@ -1,10 +1,10 @@
 import "./globals.css";
-import { Inter, Lato } from "next/font/google";
+import { Lexend, Inter } from "next/font/google";
 import { AuthProvider } from "../context/AuthContext";
 
-const lato = Lato({
+const lexend = Lexend({
   weight: ["400", "700"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={lato.className}>{children}</body>
+        <body className={lexend.className}>{children}</body>
       </AuthProvider>
     </html>
   );

@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    image: luanaparra/sem3-frontend:1.0  
+    image: luanaparra/sem3-frontend:2.0  
     container_name: frontend
     ports:
       - "3000:3000"
