@@ -1,1 +1,11 @@
 /venv
+node_modules
+bin
+catboost_info
+etc
+include
+lib
+lib64
+share
+logs.log
+__pycache__

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: transparent;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+        }
+
+        .text-red {
+            color: #ff0000;
+        }
+
+        .text-gray {
+            color: #888888;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #777777;
+            border-radius: 0.25rem;
+            background-color: #111111;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-red mb-4">Prediction App</h1>
+        <p class="text-gray mb-6">Please provide your information below for a prediction.</p>
+        <form id="prediction-form">
+            <div class="mb-4">
+                <label for="gender" class="text-gray">Select Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="age" class="text-gray">Age:</label>
+                <input type="number" id="age" name="age" min="12" max="100">
+            </div>
+            <div class="mb-4">
+                <label for="annual_income" class="text-gray">Annual Income:</label>
+                <input type="number" id="annual_income" name="annual_income" min="0">
+            </div>
+            <div class="text-center">
+                <button type="button" id="predict-button">Predict</button>
+            </div>
+        </form>
+        <p class="text-red font-semibold mt-6">Predicted Score: <span id="prediction-result" class="text-2xl font-bold"></span></p>
+    </div>
+    <script>
+        document.getElementById('predict-button').addEventListener('click', () => {
+            const gender = document.getElementById('gender').value;
+            const age = document.getElementById('age').value;
+            const annualIncome = document.getElementById('annual_income').value;
+            
+            fetch('/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "gender": gender,
+                    "age": parseInt(age),
+                    "annual_income": parseInt(annualIncome)
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('prediction-result').textContent = data?.prediction.toFixed(2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Display the error message to the user
+                document.getElementById('prediction-result').textContent = "Error: " + error.message;
+            });
+        });
+    </script>
+</body>
+</html>

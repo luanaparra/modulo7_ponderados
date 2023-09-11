@@ -1,16 +1,15 @@
-# Usando uma imagem base com Python 3.8
 FROM python:3.8-slim
 
-# Definindo a pasta de trabalho
 WORKDIR /app
 
-# Copiando o conteúdo local para a pasta de trabalho
-COPY . /app
+RUN python -m pip install --upgrade pip
 
-# Fix para erro de instalação do numpy no Alpine (falta de compilador C)
+COPY requirements.txt /app/
 
-# Instalando as dependências necessárias
-RUN pip install fastapi[all] uvicorn pycaret
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Comando para iniciar a aplicação FastAPI quando o contêiner for iniciado
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY . /app/
+
+EXPOSE 8000
+
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
