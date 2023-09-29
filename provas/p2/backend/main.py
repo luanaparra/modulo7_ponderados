@@ -5,11 +5,11 @@ import uvicorn
 import psycopg2
 
 # Constantes
-DB_USER = "meuuserawsrds"
-DB_PASSWORD = "postgres"
-DB_HOST = "database-postgres.c36tibwlwhak.us-east-1.rds.amazonaws.com"
+DB_USER = "luana"
+DB_PASSWORD = "ferrari12345"
+DB_HOST = "database-prova2.ciiecx8pfbyc.us-east-1.rds.amazonaws.com"
 DB_PORT = "5432"
-DB_NAME = "postgres"
+DB_NAME = "database-prova2"
 
 # Conexão com o banco
 con = psycopg2.connect(
