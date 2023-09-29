@@ -1,27 +1,23 @@
-# Avaliacoes-M7-Inteli
-Avaliações do Módulo 7
+# Template para avaliação P2
 
-Para executar o backend:
+Saída esperada após execução do programa:
+
+<img src="./media/tela-front.png" display="flex">
+
+# IMPORTANTE:
+
+Para colocar o frontend para funcionar, colocar uma máquina EC2 rodando o Apache WebServer.
+Para isso, instalar dentro da EC2:
 
 ```bash
-python main.py
+sudo apt update
+sudo apt upgrade
+sudo apt install apache2
+# os arquivos do projeto devem estar em /var/www/html
+git clone https://github.com/Murilo-ZC/Avaliacao-P2-M7-2023-EC.git
+sudo cp ./Avaliacao-P2-M7-2023-EC/frontend /var/www/html
 ```
 
-Para executar o frontend:
+Aqui pessoal, os arquivos já estaram disponíveis na porta 80, não necessário redirecionar.
 
-```bash
-node server.js
-```
-
-| ***IMPORTANTE:*** Utilizar dentro do contexto do container.
-
-# Comentários da atividade da P1:
-
-A utilização do Docker permite a criação dos containers que fizeram a 'junção' de todas dependências do sistema de maneira otimizada, permitindo que outras máquinas possam executar sem problemas e com maior facilidade. 
-
-Dessa maneira, nessa aplicação foram criadas duas imagens: sendo um dockerfile para o backend e outro dockerfile para o frontend:
-- Backend: https://hub.docker.com/repository/docker/luanaparra/backend-p1/general
-- Frontend: https://hub.docker.com/repository/docker/luanaparra/frontend-p1/general
-Tais imagens foram construidas com os seguintes comandos: `docker build -t luanaparra/nome-da-imagem:tag .` e `docker push luanaparra/nome-da-sua-imagem:tag`
-
-Por fim, para não utilizar o docker run, foi criado um docker-compose.yml, que excuta as duas imagens de maneira mais eficiente. Sendo assim, é só rodar o comando `docker-compose up` para as imagens serem baixadas e os containers buildados. 
+> IMPORTANTE: Verificar as rotas e utilziar o seu próprio repositório com as modificações realizadas.

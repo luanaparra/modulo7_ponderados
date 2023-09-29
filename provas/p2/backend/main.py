@@ -1,16 +1,34 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import uvicorn
-import sqlite3
+from fastapi import FastAPI, Body
+from fastapi.middleware.cors import CORSMiddleware
 
+import uvicorn
+import psycopg2
+
+# Constantes
+DB_USER = "meuuserawsrds"
+DB_PASSWORD = "postgres"
+DB_HOST = "database-postgres.c36tibwlwhak.us-east-1.rds.amazonaws.com"
+DB_PORT = "5432"
+DB_NAME = "postgres"
+
+# Conexão com o banco
+con = psycopg2.connect(
+    database= DB_NAME,
+    user= DB_USER,
+    password= DB_PASSWORD,
+    host= DB_HOST,
+    port= DB_PORT
+)
+
+# Criação do cursor
+cur = con.cursor()
 app = FastAPI()
 
-# CORS
-from fastapi.middleware.cors import CORSMiddleware
+#CORS
 origins = [
-    "http://localhost",
-    "http://localhost:3000"
+    "*"
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -19,73 +37,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Modelo de dados para as operações CRUD
-class Usuario(BaseModel):
-    nome: str
-    nome_de_usuario: str
-    senha: str
+@app.get("/notes")
+def get_notes():
+    cur.execute("SELECT * FROM minhas_notas;")
+    notes = cur.fetchall()
+    return {"data":notes}
 
-# Operação de criação (Create)
-@app.post("/usuarios/")
-def criar_usuario(usuario: Usuario):
-    cursor.execute('''
-        INSERT INTO usuarios (nome, nome_de_usuario, senha)
-        VALUES (?, ?, ?)
-    ''', (usuario.nome, usuario.nome_de_usuario, usuario.senha))
-    conn.commit()
-    return {"mensagem": "Usuário criado com sucesso"}
+@app.get("/get_note/{id}")
+def get_note(id: int):
+    cur.execute(f"SELECT * FROM minhas_notas WHERE id == {id};")
+    note = cur.fetchone()
+    return {"data":note}
 
-# Operação de leitura (Read)
-@app.get("/usuarios/{usuario_id}")
-def ler_usuario(usuario_id: int):
-    cursor.execute('SELECT * FROM usuarios WHERE id = ?', (usuario_id,))
-    usuario = cursor.fetchone()
-    if usuario:
-        return {"id": usuario[0], "nome": usuario[1], "nome_de_usuario": usuario[2]}
-    raise HTTPException(status_code=404, detail="Usuário não encontrado")
+@app.post("/create_note")
+def create_user(data: dict = Body()):
+    cur.execute(f"INSERT INTO minhas_notas (titulo, descricao) VALUES ('{data['titulo']}', '{data['descricao']}');")
+    con.commit()
+    return {"data": "Nota criada com sucesso!"}
 
-# Operação de leitura (Read)
-@app.get("/usuarios/")
-def ler_usuarios():
-    cursor.execute('SELECT * FROM usuarios')
-    ler_usuarios = cursor.fetchall()
-    if len:
-        return ler_usuarios
-    raise HTTPException(status_code=404, detail="Usuário não encontrado")
+@app.put("/update_note")
+def update_user(data: dict = Body()):
+    cur.execute(f"UPDATE minhas_notas SET titulo = '{data['titulo']}', descricao = '{data['descricao']}' WHERE id = {data['id']};")
+    con.commit()
+    return {"data": "Nota atualizada com sucesso!"}
 
-# Operação de atualização (Update)
-@app.put("/usuarios/{usuario_id}")
-def atualizar_usuario(usuario_id: int, usuario: Usuario):
-    cursor.execute('''
-        UPDATE usuarios
-        SET nome = ?, nome_de_usuario = ?, senha = ?
-        WHERE id = ?
-    ''', (usuario.nome, usuario.nome_de_usuario, usuario.senha, usuario_id))
-    conn.commit()
-    return {"mensagem": "Usuário atualizado com sucesso"}
-
-# Operação de exclusão (Delete)
-@app.delete("/usuarios/{usuario_id}")
-def deletar_usuario(usuario_id: int):
-    cursor.execute('DELETE FROM usuarios WHERE id = ?', (usuario_id,))
-    conn.commit()
-    return {"mensagem": "Usuário deletado com sucesso"}
-
-# Configuração do banco de dados SQLite
-db_path = "usuarios.db"
-conn = sqlite3.connect(db_path, check_same_thread=False)
-cursor = conn.cursor()
-
-# Criação da tabela de usuários
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS usuarios (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
-        nome_de_usuario TEXT NOT NULL,
-        senha TEXT NOT NULL
-    )
-''')
-conn.commit()
+@app.delete("/delete_note")
+def delete_user(data: dict = Body()):
+    cur.execute(f"DELETE FROM minhas_notas WHERE id = {data['id']};")
+    con.commit()
+    return {"data": "Nota deletada com sucesso!"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,42 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Gerenciamento de Usuários</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo List - Prova Prática 2 - Inteli M7 - 2023</title>
 </head>
 <body>
-    <h1>Gerenciamento de Usuários</h1>
-
-    <h2>Criar Usuário</h2>
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome"><br>
-    <label for="nome_de_usuario">Nome de Usuário:</label>
-    <input type="text" id="nome_de_usuario"><br>
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha"><br>
-    <button onclick="criarUsuario()">Criar Usuário</button>
-
-    <h2>Buscar Usuário</h2>
-    <label for="usuario_id">ID do Usuário:</label>
-    <input type="number" id="usuario_id">
-    <button onclick="buscarUsuario()">Buscar Usuário</button>
-    <p id="usuario_info"></p>
-
-    <h2>Atualizar Usuário</h2>
-    <label for="usuario_id_atualizar">ID do Usuário:</label>
-    <input type="number" id="usuario_id_atualizar">
-    <label for="nome_atualizar">Nome:</label>
-    <input type="text" id="nome_atualizar">
-    <label for="nome_de_usuario_atualizar">Nome de Usuário:</label>
-    <input type="text" id="nome_de_usuario_atualizar">
-    <label for="senha_atualizar">Senha:</label>
-    <input type="password" id="senha_atualizar">
-    <button onclick="atualizarUsuario()">Atualizar Usuário</button>
-
-    <h2>Deletar Usuário</h2>
-    <label for="usuario_id_deletar">ID do Usuário:</label>
-    <input type="number" id="usuario_id_deletar">
-    <button onclick="deletarUsuario()">Deletar Usuário</button>
-
-    <script src="script.js"></script>
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <h1>🌠Todo List:</h1>
+    </div>
+    <div class="h-100 d-flex justify-content-center p-3">
+        <input type="text" id="taskInput" placeholder="Digite uma nova tarefa">
+        <button type="button" class="btn btn-primary" onclick="addTask()">Adicionar Tarefa</button>
+    </div>
+    <div class="align-items-center mx-auto">
+        <ul id="taskList">
+        </ul>
+    </div>
+    <script defer src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
