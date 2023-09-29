@@ -1,169 +1,128 @@
-# DOCKER
+# Prática:
+
+Vou ter que subir o meu frontend em uma máquina virtual (ec2) com apache http, que vai estar conectado com o backend em FastAPI que está em outra máquina virtual(ec2), que também vai estar conectado com o banco de dados (rds) que vai estar em outra máquina virtual (ec2)
+
+### Configuração das máquinas virtuais
+EC2 backend, EC2 banco de dados, EC2 frontend.
+
+### Configuração do RDS (banco de dados)
+Criação padrão do RDS
+
+### Dockerfile
 1. docker login
-2. na pasta de cada imagem que você deseja construir: docker build -t luanaparra/nome-da-sua-imagem:tag .
-3. logo, em seguida para cada imagem: docker push luanaparra/nome-da-sua-imagem:tag
-4. por fim, ao criar o dockerfile docker-compose.yml: docker-compose up
+2. docker build -t luanaparra/frontend-p2 .
+3. docker build -t luanaparra/backend-p2 .
+4. docker build -t luanaparra/banco-p2 .
+5. docker tag luanaparra/frontend-p2 luanaparra/frontend-p2:tag
+6. docker tag luanaparra/backend-p2 luanaparra/backend-p2:tag
+7. docker tag luanaparra/banco-p2 luanaparra/banco-p2:tag
+8. docker push luanaparra/frontend-p2:tag
+9. docker push luanaparra/backend-p2:tag
+10. docker push luanaparra/banco-p2:tag
 
-# APLICAÇÃO - backend (usando FastAPI)
-1. cd na pasta principal
-2. python -m venv nome da venv
-3. venv\Scripts\activate
-4. dentro do venv: pip install fastapi uvicorn[standard] sqlalchemy
+### Conexão com servidor
+### Como rodar a sua aplicação AWS
 
-# APLICAÇÃO - frontend (usando Next)
-? usando bash mkdir!
-1. npx create-next-app nome-do-seu-projeto
-2. Após a criação do projeto, navegue até o diretório do seu projeto: cd nome-do-seu-projeto
-3. Você pode iniciar o servidor de desenvolvimento com o seguinte comando: npm run dev e http://localhost:3000/
-5. Quando você estiver pronto para implantar sua aplicação, você pode criar uma versão de produção usando o seguinte comando: npm run build
+# APACHE (subir o front)
+1. sudo apt update
+2. sudo apt upgrade
+3. sudo apt install apache2
+4. porta 80
+5. /var/www/http
 
-# ETL 
-1. Extração (Extraction): Nesta fase, os dados são coletados de diversas fontes, que podem incluir bancos de dados, planilhas, arquivos CSV, APIs da web, logs, entre outros. A extração geralmente envolve a seleção de dados relevantes para a análise e a coleta de informações brutas das fontes de dados.
-2. Transformação (Transformation): Após a extração, os dados brutos são transformados em um formato adequado para análise e carregamento. As etapas de transformação podem incluir limpeza de dados para remover duplicatas, valores ausentes ou inconsistentes, normalização de dados, conversão de tipos de dados, agregação, enriquecimento de dados com informações adicionais e aplicação de regras de negócios. A transformação é uma etapa crítica, pois garante que os dados estejam prontos para análises significativas e precisas.
-3. Carga (Loading): A fase de carga envolve a inserção dos dados transformados em um repositório de destino, como um data warehouse, um banco de dados relacional ou um sistema de armazenamento de dados apropriado. Os dados são carregados em tabelas ou estruturas de dados no repositório de destino de acordo com um esquema pré-definido.
-Dependendo dos requisitos de negócios, a carga de dados pode ser realizada de várias maneiras, como substituição total (truncate and reload) ou incremento (adicionar apenas novos dados ou atualizar registros existentes).
+# EC2
+Uma EC2 (Elastic Compute Cloud) da AWS é um serviço de computação em nuvem que permite criar e gerenciar máquinas virtuais (VMs) escaláveis na infraestrutura da Amazon Web Services (AWS). As EC2s são usadas para executar cargas de trabalho computacionais, como hospedar aplicativos da web, executar servidores de banco de dados, realizar análises de dados, executar tarefas de processamento em lote e muito mais. Aqui estão os principais conceitos relacionados a EC2 e como usá-los:
 
-# JWT
-1. Instale a biblioteca PyJWT para trabalhar com JWT no servidor back-end: pip install pyjwt
-2. Crie uma rota para lidar com a autenticação e a geração de tokens JWT em seu aplicativo FastAPI. Isso pode ser feito em um arquivo como auth.py:
-   from fastapi import FastAPI, Depends, HTTPException
-``` python
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
-import jwt
-from passlib.context import CryptContext
-from datetime import datetime, timedelta
-from typing import Optional
+Instâncias EC2: Uma instância EC2 é uma VM que você pode criar na AWS. Existem diversos tipos de instâncias com diferentes combinações de CPU, memória, armazenamento e capacidades de rede. Você escolhe o tipo de instância com base nas necessidades específicas da sua carga de trabalho.
 
-app = FastAPI()
+AMI (Amazon Machine Image): Uma AMI é uma imagem pré-configurada de uma instância EC2 que inclui o sistema operacional e o software que você deseja executar. Você pode usar AMIs públicas ou criar suas próprias AMIs personalizadas.
 
-# Configuração de autenticação
-SECRET_KEY = "mysecretkey"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+Grupos de Auto Scaling: Os grupos de auto scaling permitem que você dimensione automaticamente o número de instâncias EC2 com base na demanda. Isso ajuda a garantir que sua aplicação seja altamente disponível e capaz de lidar com picos de tráfego.
 
-# Simulação de um banco de dados de usuários (substitua com seu próprio armazenamento de usuários)
-users_db = {}
+Redes VPC (Virtual Private Cloud): Você pode criar redes virtuais privadas (VPCs) para isolar suas instâncias EC2 e controlar o tráfego de rede. Isso permite segmentar suas aplicações e melhorar a segurança.
 
-class User(BaseModel):
-    username: str
+Segurança: Você pode configurar grupos de segurança para controlar as regras de firewall de suas instâncias EC2. Isso ajuda a proteger suas instâncias e limitar o acesso não autorizado.
 
-class UserInDB(User):
-    hashed_password: str
+Armazenamento: A AWS oferece várias opções de armazenamento para suas instâncias EC2, incluindo armazenamento de bloco (por exemplo, Amazon EBS) e armazenamento de objetos (por exemplo, Amazon S3). Você pode escolher o tipo de armazenamento adequado para suas necessidades.
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str
+Monitoramento e gerenciamento: A AWS fornece ferramentas como o Amazon CloudWatch para monitorar o desempenho de suas instâncias EC2 e o AWS Systems Manager para automatizar tarefas de gerenciamento, como aplicação de patches e configuração.
 
-class TokenData(BaseModel):
-    username: str | None = None
+# RDS
+O Amazon RDS (Relational Database Service) é um serviço de banco de dados gerenciado oferecido pela Amazon Web Services (AWS). Ele facilita a criação, o gerenciamento e a escalabilidade de bancos de dados relacionais. O RDS é projetado para simplificar as tarefas administrativas relacionadas a bancos de dados, como provisionamento, configuração, backup e manutenção, permitindo que os desenvolvedores se concentrem em suas aplicações em vez de gerenciar a infraestrutura de banco de dados. Aqui está uma visão geral de como usar o Amazon RDS:
 
-class UserCreate(BaseModel):
-    username: str
-    password: str
+Escolha o Motor de Banco de Dados: O RDS oferece suporte a vários motores de banco de dados, incluindo MySQL, PostgreSQL, Oracle, SQL Server e MariaDB. Primeiro, você precisa escolher o motor de banco de dados que melhor atenda às necessidades da sua aplicação.
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+Crie uma Instância do RDS: No Console AWS ou por meio da AWS CLI/API, você pode criar uma instância do Amazon RDS. Durante o processo de criação, você define parâmetros como o tipo de instância, a capacidade de armazenamento, as opções de segurança e o nome do banco de dados.
 
-# Funções de autenticação
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+Conecte-se ao Banco de Dados: Após a criação da instância, você pode se conectar ao banco de dados usando as credenciais fornecidas durante o processo de criação. Isso permite que você execute consultas SQL, insira dados e gerencie o banco de dados como faria com qualquer outro banco de dados relacional.
 
-def get_password_hash(password):
-    return pwd_context.hash(password)
+Gerencie e Otimize: O RDS gerencia automaticamente tarefas como backup, replicação, aplicação de patches e atualização do sistema operacional do banco de dados. Você também pode configurar alarmes de monitoramento para acompanhar o desempenho do banco de dados e ajustar recursos conforme necessário.
 
-def create_access_token(data: dict, expires_delta: timedelta = None):
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+Escalabilidade: O Amazon RDS permite escalonar verticalmente (aumentar a capacidade de CPU e RAM) ou horizontalmente (adicionar réplicas de leitura) conforme a demanda da sua aplicação. Isso ajuda a lidar com cargas de trabalho variáveis.
 
-# Rota de login
-@app.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = users_db.get(form_data.username)
-    if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(status_code=400, detail="Credenciais inválidas")
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
-    return {"access_token": access_token, "token_type": "bearer"}
+Backup e Recuperação: O RDS oferece recursos avançados de backup e recuperação. Você pode criar snapshots automáticos e manuais para fazer backup dos dados do banco de dados, e também pode restaurar o banco de dados a partir desses snapshots em caso de falha.
 
-# Rota protegida que requer autenticação
-@app.get("/users/me/", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
-    return current_user
+Segurança: O RDS fornece opções de segurança robustas, como grupos de segurança, criptografia de dados em repouso e em trânsito, autenticação baseada em IAM e integração com o AWS Identity and Access Management (IAM) para gerenciar permissões de acesso.
 
-# Função para obter o usuário atual autenticado
-def get_current_active_user(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(status_code=401, detail="Não autenticado")
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        token_data = TokenData(username=username)
-    except jwt.ExpiredSignatureError:
-        raise credentials_exception
-    except jwt.JWTError:
-        raise credentials_exception
-    return token_data
-```
-3. No lado do front-end, você deve criar um formulário de login e usar a biblioteca axios ou outra biblioteca de sua escolha para fazer solicitações HTTP para a rota /token no back-end para obter o token JWT quando o usuário fizer login. Armazene o token JWT em um cookie ou no armazenamento local do navegador para manter o usuário autenticado entre as sessões.
-4. Para proteger rotas que requerem autenticação, você pode criar um componente de wrapper ou middleware no lado do front-end para verificar se o token JWT está presente e válido antes de permitir o acesso a essas rotas.
-```
-// Exemplo de função para verificar a autenticação
-function requireAuthentication(Component) {
-    return function AuthenticatedComponent(props) {
-        const token = getTokenFromLocalStorage(); // Implemente essa função
-        if (!token) {
-            // Redirecionar ou exibir uma página de login
-            return <LoginPage />;
-        }
-        // Renderizar o componente original com as props
-        return <Component {...props} />;
-    };
-}
-```
-6. Use esse componente de wrapper/middleware para proteger as rotas que exigem autenticação.
-```
-import requireAuthentication from './requireAuthentication';
+Alta Disponibilidade: Você pode configurar instâncias de banco de dados multi-AZ (Disponibilidade em Zonas de Disponibilidade) para obter alta disponibilidade e recuperação automática em caso de falhas na zona de disponibilidade primária.
 
-const ProtectedRoute = requireAuthentication(ProtectedComponent);
+Manutenção e Atualizações: O RDS facilita a aplicação de patches e atualizações de banco de dados. Você pode agendar janelas de manutenção para garantir que as atualizações ocorram sem afetar a disponibilidade da aplicação.
 
-// Em suas rotas
-<Route path="/minha-rota-protegida" component={ProtectedRoute} />;
-```
-# Fluxo do processo de autentificação utilizando JWT
-O processo de autenticação utilizando JSON Web Tokens (JWT) envolve várias etapas que permitem que um usuário seja autenticado de maneira segura em um sistema ou aplicativo. Aqui está um fluxo típico do processo de autenticação usando JWT:
+O Amazon RDS é amplamente utilizado para hospedar bancos de dados relacionais em aplicações web, aplicativos empresariais e muito mais. Ele oferece um equilíbrio entre a facilidade de uso e o controle, permitindo que os desenvolvedores se concentrem no desenvolvimento de software, enquanto a AWS gerencia a infraestrutura de banco de dados subjacente.
 
-1. Registro do Usuário: O primeiro passo é o registro do usuário no sistema. O usuário fornece informações como nome de usuário, senha ou outras credenciais necessárias.
-2. Autenticação do Usuário: Quando o usuário tenta fazer login, ele fornece suas credenciais (normalmente, nome de usuário e senha) ao sistema.
-3. Validação das Credenciais: O sistema valida as credenciais do usuário. Isso envolve verificar se o nome de usuário existe no sistema e se a senha fornecida corresponde à senha armazenada (geralmente, a senha é armazenada de forma segura usando técnicas de hashing).
-4. Criação do JWT (Token de Acesso): Se as credenciais do usuário forem válidas, o sistema cria um JWT. O JWT é composto por três partes: o cabeçalho (header), o payload (carga útil) e a assinatura (signature). O cabeçalho especifica o tipo de token e o algoritmo de assinatura usado. O payload contém informações sobre o usuário, como ID e papel (role). A assinatura é uma sequência criptograficamente segura que verifica a integridade do token.
-5. Envio do JWT para o Cliente: O JWT é enviado de volta ao cliente (geralmente, como parte da resposta após a autenticação bem-sucedida). O cliente pode armazenar o JWT localmente, geralmente em um cookie ou em armazenamento local (localStorage ou sessionStorage) no navegador.
-6. Envio do JWT em Solicitações Futuras: O cliente inclui o JWT em todas as solicitações subsequentes ao servidor. Isso é geralmente feito adicionando o token ao cabeçalho HTTP da solicitação, usando o cabeçalho Authorization com o valor "Bearer [token]".
-7. Verificação do JWT no Servidor: O servidor recebe as solicitações do cliente e verifica o JWT incluído. Isso envolve a validação da assinatura para garantir que o token não foi adulterado.
-8. Verificação de Permissões (Opcional): Além de verificar a autenticidade do JWT, o servidor pode verificar as permissões associadas ao usuário, com base nas informações contidas no token, para garantir que o usuário tenha acesso aos recursos solicitados.
-9. Resposta da Solicitação: Se o JWT for válido e o usuário tiver as permissões necessárias, o servidor processará a solicitação e responderá ao cliente.
-10. Expiração e Renovação (Opcional): Os JWTs geralmente têm uma data de expiração. O servidor pode implementar um mecanismo para permitir a renovação do token ou a reautenticação do usuário quando o token expirar.
+# Geração de modelos (autoML e pycaret)
+A geração de modelos e o AutoML (Machine Learning Automatizado) são conceitos relacionados à automação de tarefas de aprendizado de máquina, tornando mais fácil e eficiente o processo de criação de modelos de machine learning. O Pycaret é uma biblioteca Python que oferece ferramentas e funcionalidades para simplificar a geração de modelos de machine learning e é um exemplo de uma ferramenta que ajuda a implementar o AutoML.
 
-# Bancos de dados relacionais e não relacionais:
-Bancos de dados relacionais (RDBMS) e bancos de dados não relacionais (NoSQL) são dois tipos diferentes de sistemas de gerenciamento de banco de dados (DBMS) que são projetados para armazenar e recuperar dados de maneiras diferentes. Aqui estão noções gerais sobre cada um deles:
+Aqui está uma explicação mais detalhada sobre cada um desses conceitos:
 
-Banco de Dados Relacional (RDBMS):
-1. Estrutura de Dados: Os bancos de dados relacionais usam uma estrutura de dados tabular, em que os dados são organizados em tabelas com linhas e colunas. Cada tabela tem um esquema predefinido que define os tipos de dados e as relações entre as tabelas.
-2. Esquema Fixo: Os RDBMS têm esquemas de dados rígidos e predefinidos, o que significa que a estrutura das tabelas e a definição dos campos são definidas antes de inserir os dados. As mudanças no esquema podem ser complicadas.
-3. Linguagem SQL: Os RDBMS usam a linguagem SQL (Structured Query Language) para consultar e manipular dados. SQL é uma linguagem declarativa que permite que os usuários descrevam o que desejam fazer com os dados, em vez de como fazê-lo.
-4. Transações ACID: Os RDBMS são conhecidos por suportar transações ACID (Atomicidade, Consistência, Isolamento e Durabilidade), garantindo que as operações de banco de dados sejam consistentes e confiáveis, mesmo em cenários de falha.
-5. Escalabilidade Vertical: Tradicionalmente, os RDBMS têm sido escalados verticalmente, o que significa que o aumento de desempenho é alcançado por meio do uso de hardware mais poderoso.
+Geração de Modelos (Model Generation): A geração de modelos se refere ao processo de desenvolvimento de algoritmos de aprendizado de máquina com base em dados. Isso envolve a criação, treinamento e avaliação de modelos de machine learning para realizar tarefas específicas, como classificação, regressão, clusterização, etc. Tradicionalmente, esse processo exigia a escolha manual de algoritmos, pré-processamento de dados e ajuste de hiperparâmetros, tornando-o muitas vezes complexo e demorado.
 
-Banco de Dados Não Relacional (NoSQL):
-1. Estrutura Flexível: Os bancos de dados NoSQL permitem uma variedade de estruturas de dados, incluindo documentos, gráficos, pares chave-valor e colunas. Essa flexibilidade torna os NoSQL adequados para cenários onde os esquemas de dados são variáveis ou desconhecidos antecipadamente.
-2. Esquema Dinâmico: Ao contrário dos RDBMS, os bancos de dados NoSQL não têm esquemas de dados rígidos, o que facilita a adição ou remoção de campos sem a necessidade de uma estrutura de migração complexa.
-3. Modelo de Consulta Diferente: Os bancos de dados NoSQL usam uma variedade de modelos de consulta, incluindo consultas baseadas em chave, consultas baseadas em documentos e consultas baseadas em grafos. A linguagem de consulta pode variar dependendo do tipo de NoSQL utilizado.
-4. Escalabilidade Horizontal: Os bancos de dados NoSQL são frequentemente escalados horizontalmente, o que significa que você pode adicionar mais servidores para aumentar o desempenho. Isso os torna adequados para cargas de trabalho distribuídas e escaláveis.
-5. Consistência Flexível: Muitos bancos de dados NoSQL sacrificam a consistência forte em favor da disponibilidade e da tolerância a falhas (modelo CAP). Isso significa que eles podem ser consistentes eventualmente, mas não necessariamente em tempo real.
+AutoML (Machine Learning Automatizado): O AutoML é uma abordagem que automatiza partes ou todo o processo de criação de modelos de machine learning. Ele utiliza técnicas de automação para realizar tarefas como seleção de algoritmos, pré-processamento de dados, otimização de hiperparâmetros e avaliação de modelos, tudo isso de forma automática. O objetivo do AutoML é tornar o desenvolvimento de modelos mais acessível para pessoas com diferentes níveis de experiência em machine learning, reduzindo a necessidade de conhecimento especializado em detalhes técnicos.
 
+Pycaret: O Pycaret é uma biblioteca Python que oferece uma estrutura de alto nível para o desenvolvimento de modelos de machine learning. Ele é projetado para facilitar a criação de modelos, acelerando tarefas comuns de machine learning e automação de partes do processo. O Pycaret inclui funções para pré-processamento de dados, seleção automática de modelos, ajuste automático de hiperparâmetros, avaliação de modelos e geração de relatórios. É uma ferramenta útil para pessoas que desejam criar modelos de machine learning de maneira rápida e eficiente, especialmente quando se está explorando várias abordagens de modelagem.
+
+O Pycaret se encaixa no conceito de AutoML, pois automatiza muitos aspectos do processo de criação de modelos, permitindo que os usuários se concentrem mais nas análises dos resultados e menos na implementação técnica. Isso é particularmente útil em cenários em que você deseja prototipar rapidamente modelos de machine learning ou quando não possui um profundo conhecimento em machine learning, mas ainda deseja obter insights valiosos de seus dados por meio de modelos preditivos.
+
+# Streamlit
+Streamlit é uma biblioteca Python de código aberto que torna a criação de aplicativos web interativos simples e rápida. É especialmente útil para cientistas de dados, engenheiros de machine learning e desenvolvedores que desejam compartilhar suas análises de dados, visualizações e modelos de machine learning com outras pessoas, sem a necessidade de conhecimento aprofundado em desenvolvimento web.
+
+Aqui estão alguns dos principais pontos sobre o Streamlit:
+
+Principais Características:
+
+Simplicidade: O Streamlit é conhecido por sua simplicidade. Você pode criar um aplicativo web funcional com apenas algumas linhas de código Python.
+
+Interatividade: Ele permite criar aplicativos interativos onde os usuários podem interagir com elementos da interface, como botões, barras de rolagem e caixas de seleção.
+
+Integração de Gráficos: É fácil integrar gráficos e visualizações, como gráficos Matplotlib, Plotly ou Seaborn, em seu aplicativo.
+
+Widgets Personalizáveis: O Streamlit oferece widgets personalizáveis para entrada de dados, incluindo campos de texto, botões, barras de progresso e muito mais.
+
+Facilidade de Implantação: Uma vez que você tenha criado seu aplicativo com o Streamlit, pode implantá-lo em diversos serviços de hospedagem, como Heroku, AWS, ou até mesmo na sua máquina local para uso pessoal.
+
+Como Usar o Streamlit:
+
+Instalação: Primeiro, você precisa instalar o Streamlit. Você pode fazer isso com o comando pip:
+
+`pip install streamlit`
+
+Criação de um Aplicativo: Você pode criar um aplicativo Streamlit em um arquivo Python simples. Em geral, um aplicativo Streamlit é composto por funções Python que são executadas em ordem. Cada função é chamada quando um evento específico ocorre, como a abertura do aplicativo ou a interação com um widget.
+
+Execução do Aplicativo: Para iniciar o aplicativo, você pode usar o seguinte comando:
+
+`streamlit run nome_do_arquivo.py`
+
+Desenvolvimento do Aplicativo: Use a biblioteca para criar widgets e visualizações interativas. Por exemplo, você pode criar botões, gráficos, tabelas e outros elementos de interface do usuário diretamente no seu código Python.
+
+Visualização do Aplicativo: O Streamlit abrirá automaticamente uma janela do navegador com o seu aplicativo em execução. Você pode interagir com ele e compartilhar a URL do aplicativo com outras pessoas.
+
+Implantação: Quando estiver satisfeito com o seu aplicativo, você pode implantá-lo em um serviço de hospedagem para torná-lo acessível a outras pessoas pela internet.
+
+O Streamlit é uma ferramenta poderosa para criar rapidamente protótipos de aplicativos web, compartilhar análises de dados e criar painéis interativos. É altamente recomendado para qualquer pessoa que queira criar aplicativos da web de forma rápida e eficiente usando Python.
+
+# Escala vertical e horizontal
+- EC2 é bom para escala vertical, e containeres (com um orquestrador) são bons para horizontal.
+- Escala vertical ou escalar ou reduzir verticalmente, na qual você aumenta ou diminui a capacidade de computação ou os bancos de dados conforme necessário, alterando os níveis de desempenho ou usando pools de banco de dados elástico para se ajustar automaticamente às suas demandas de carga de trabalho.
+- Quando escalar verticalmente: Observar que as suas cargas de trabalho estão atingindo algum limite de desempenho, como limites de CPU ou de E/S, Precisar reagir rapidamente para consertar problemas de desempenho que não podem ser resolvidos com a otimização do banco de dados clássica, Precisar de uma solução que permita alterar as camadas de serviço para se adaptar à alteração dos requisitos de latência.
+- Escala horizontal ou escalar ou reduzir horizontalmente, na qual você adiciona mais bancos de dados ou divide seu banco de dados grandes em nós menores, usando uma abordagem de particionamento de dado chamada fragmentação, que pode ser gerenciada com mais rapidez e facilidade entre servidores.
+- Quando escalar horizontalmente: Você tiver aplicativos distribuídos geograficamente em que cada aplicativo deve acessar parte dos dados na região. Cada aplicativo acessará apenas o fragmento associado a essa região sem afetar outros fragmentos, Você tiver um cenário de fragmentação global, como balanceamento de carga, em que há um grande número de clientes distribuídos geograficamente que inserem dados nos próprios fragmentos dedicados, Você atingir o limite dos seus requisitos de desempenho, mesmo nos níveis de desempenho mais altos do seu serviço, ou se os dados não couberem em um banco de dados individual.
