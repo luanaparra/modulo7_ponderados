@@ -11,7 +11,9 @@ Aqui já podemos ver que foram criadas as duas instâncias que já estão sendo 
 <img src="./media/instancia2.png" display="flex">
 
 ## Passo 2 - RDS
-Posto isso, foi criado o RDS (database-prova2) com todas as configurações necessárias, além de deixar acessivelmente público.
+Posto isso, foi criado o RDS (database-prova2) com todas as configurações necessárias, além de deixar acessivelmente público. Ademais, com as informações desse banco, foi alterado os dados para conexão com o banco de dados no código de backend.
+
+Então, configuramos também os grupos de segurança dele, em inbound rules, para receber conexões TCP de todos os IPs (0.0.0.0).
 
 <img src="./media/rds.png" display="flex">
 
@@ -29,9 +31,14 @@ O último comando é necessário, pois vamos servir o frontend com Apache. A fim
 
 Assim, foi clonado este repositório com as urls modificadas.
 
-## Passo 4 
-Saída esperada após execução do programa:
+## Passo 4 - Backend
+Na instância backend-prova2, tais comandos forma utilizados:
 
+```bash
+sudo apt update
+sudo apt upgrade
+```
+Além de clonar esse repositório
 <img src="./media/tela-front.png" display="flex">
 
 # IMPORTANTE:
