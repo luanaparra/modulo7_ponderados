@@ -1,5 +1,18 @@
 # Avaliação P2
 
+## Passo 1
+Em primeiro lugar foram criadas as instâncias do backend e frontend, ou seja, duas EC2. 
+
+<img src="./media/instancia1.png" display="flex">
+
+Aqui já podemos ver que foram criadas as duas instâncias que já estão sendo executadas, com IP elástico já alocados nelas.
+
+<img src="./media/ipelastico.png" display="flex">
+<img src="./media/instancia2.png" display="flex">
+
+## Passo 2 
+## Passo 3 
+## Passo 4 
 Saída esperada após execução do programa:
 
 <img src="./media/tela-front.png" display="flex">
