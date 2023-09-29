@@ -1,4 +1,4 @@
-# Template para avaliação P2
+# Avaliação P2
 
 Saída esperada após execução do programa:
 
