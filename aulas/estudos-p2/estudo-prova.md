@@ -20,7 +20,19 @@ Criação padrão do RDS
 9. docker push luanaparra/backend-p2:tag
 10. docker push luanaparra/banco-p2:tag
 
+### Imagem nas instâncias
+sudo apt update
+sudo apt install docker.io -y
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+docker pull nome-da-imagem
+
+docker images
+
 ### Conexão com servidor
+
 ### Como rodar a sua aplicação AWS
 
 # APACHE (subir o front)
@@ -28,7 +40,8 @@ Criação padrão do RDS
 2. sudo apt upgrade
 3. sudo apt install apache2
 4. porta 80
-5. /var/www/http
+5. /var/www/html
+6. sudo nano /var/www/html/index.html
 
 # EC2
 Uma EC2 (Elastic Compute Cloud) da AWS é um serviço de computação em nuvem que permite criar e gerenciar máquinas virtuais (VMs) escaláveis na infraestrutura da Amazon Web Services (AWS). As EC2s são usadas para executar cargas de trabalho computacionais, como hospedar aplicativos da web, executar servidores de banco de dados, realizar análises de dados, executar tarefas de processamento em lote e muito mais. Aqui estão os principais conceitos relacionados a EC2 e como usá-los:
