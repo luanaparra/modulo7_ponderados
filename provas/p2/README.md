@@ -11,11 +11,25 @@ Aqui já podemos ver que foram criadas as duas instâncias que já estão sendo 
 <img src="./media/instancia2.png" display="flex">
 
 ## Passo 2 - RDS
-Posto isso, foi criado o RDS (database-prova2) com todas as configurações necessárias, além de deixar acessivelmente público.
+Posto isso, foi criado o RDS (database-prova2) com todas as configurações necessárias, além de deixar acessivelmente público. Ademais, com as informações desse banco, foi alterado os dados para conexão com o banco de dados no código de backend.
+
+Então, configuramos também os grupos de segurança dele, em inbound rules, para receber conexões TCP de todos os IPs (0.0.0.0).
 
 <img src="./media/rds.png" display="flex">
 
-## Passo 3 - Frontend
+## Passo 3 - Backend
+Na instância backend-prova2, tais comandos foram utilizados:
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install python3 python3-pip -y
+sudo git clone https://github.com/luanaparra/modulo7_ponderados
+python3 -m pip install -r requirements.txt
+```
+Posto isso, rodamos o arquivo criar_banco.py.
+
+## Passo 4 - Frontend
 Na instância frontend-prova2, os seguintes comandos foram utilizados:
 
 ```bash
@@ -27,27 +41,15 @@ O último comando é necessário, pois vamos servir o frontend com Apache. A fim
 
 <img src="./media/apache.png" display="flex">
 
-Assim, foi clonado este repositório com as urls modificadas.
+Assim, foi clonado este repositório com as urls modificadas. Dessa maneira, foi possível 
 
-## Passo 4 
-Saída esperada após execução do programa:
+```bash
+sudo cp ./modulo7_ponderados/provas/p2/frontend/index.html /var/www/html
+```
+
+# ENTREGA FINAL:
+
+<img src="./media/tela-front1.png" display="flex">
 
 <img src="./media/tela-front.png" display="flex">
 
-# IMPORTANTE:
-
-Para colocar o frontend para funcionar, colocar uma máquina EC2 rodando o Apache WebServer.
-Para isso, instalar dentro da EC2:
-
-```bash
-sudo apt update
-sudo apt upgrade
-sudo apt install apache2
-# os arquivos do projeto devem estar em /var/www/html
-git clone https://github.com/Murilo-ZC/Avaliacao-P2-M7-2023-EC.git
-sudo cp ./Avaliacao-P2-M7-2023-EC/frontend /var/www/html
-```
-
-Aqui pessoal, os arquivos já estaram disponíveis na porta 80, não necessário redirecionar.
-
-> IMPORTANTE: Verificar as rotas e utilziar o seu próprio repositório com as modificações realizadas.
