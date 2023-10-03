@@ -1,52 +1,49 @@
-# Atividade 3 - Deploy de modelo de Machine Learning na Nuvem
+# Atividade 5 - Resenha sobre o artigo
 
-Construção e deploy de um modelo de predição ou classificação criados pelos alunos. Este modelo deve ser deployado em uma nuvem comercial e uma API de acesso a ele deve ser desenvolvida.
+Esta atividade ponderada tem por objetivo realizar a construção de uma comparação com o que foi desenvolvido nas outras atividades ponderadas e o artigo lido durante o autoestudo da semana. Os alunos deverão fazer uma comparação do que foi implementado por eles, com o que foi proposto pelo artigo, comparando as similaridades e diferenças. A resenha não deve possuir mais que 1000 palavras, sendo que, eventuais códigos utilizados para demonstração, não fazem parte desta contagem.
 
-#### Espera-se encontrar na entrega do projeto:
-Os pontos que serão avaliados na entrega do projeto:
+## Resenha
 
-(Até 1.0 ponto) Construção do dockerfile: o arquivo contem todas as informações necessárias para a construção da imagem dos containers para produção;
-(Até 1.0 ponto) Publicação das Imagens para a API: a API foi publicada corretamente na cloud;
-(Até 1.0 ponto) Documentação do ambiente de desenvolvimento: documentar o ambiente de desenvolvimento (não precisa estar dockerizado), seus requisitos e como executar o projeto. Exportar os notebooks temporários que foram utilizados em seu desenvolvimento;
-(Até 1.0 ponto) Documentação da API e seu funcionamento;
-(Até 1.0 ponto) Descrever qual modelo de Machine Learning foi escolhido e justificar sua escolha: essa justificativa pode vir da comparação entre diversos modelos que foram previamente aplicados;
-(Até 1.0 ponto) As instruções no arquivo README foram suficientes para executar a aplicação: as instruções no arquivo README foram suficientes para executar a aplicação APENAS SEGUINDO OS PASSOS CONTIDOS NO DOCUMENTO;
-(Até 2.0 pontos) Treinamento do modelo;
-(Até 2.0 pontos) Pré-processamento dos dados;
+### Sumarização
+O artigo destaca a interseção entre a Internet das Coisas (IoT) e as técnicas de aprendizado de máquina (machine learning) para a análise de dados gerados por dispositivos interconectados. O aumento expressivo no número de dispositivos conectados à Internet tem impulsionado a IoT, e a ciência de dados desempenha um papel crucial na extração de conhecimento desses dados, introduzindo o conceito de "smart data". Na seção de revisão de literatura, são tratados os desafios e abordagens na mineração de dados na IoT, incluindo modelos em camadas, distribuídos e baseados em grade, destacando a importância da mineração de dados em aplicações comuns da IoT, como tráfego inteligente, saúde e cidades inteligentes. Isso oferece uma visão abrangente das abordagens e desafios nesse campo em constante evolução.
 
-### Passo a passo:
+Em seguida, o artigo aborda o conceito da Internet das Coisas (IoT) e seus principais componentes, destacando sua finalidade de criar um ambiente mais inteligente e simplificado, economizando tempo, energia e dinheiro. A explicação inclui a conexão de dispositivos que podem trocar dados automaticamente para otimizar seu desempenho. Além disso, são discutidos os avanços recentes da IoT relacionados ao uso frequente de etiquetas RFID, sensores de baixo custo, tecnologia web e protocolos de comunicação. O texto também aborda a importância dos protocolos de comunicação, que são divididos em três tipos: dispositivo para dispositivo (D2D), dispositivo para servidor (D2S) e servidor para servidor (S2S). São apresentadas também as estratégias de processamento de dados, como fog computing, edge computing e cloud computing, que desempenham um papel fundamental na IoT.
 
-O modelo foi desenvolvido com base em um conjunto de dados cuidadosamente selecionado, optando pelo conjunto de dados de Customer Segmentation devido à sua simplicidade, o que simplificou o processo de engenharia de recursos. Neste projeto, apresentamos um modelo preditivo que recebe informações sobre a idade, renda anual e sexo do cliente e usa esses dados para estimar seu score como cliente.
+Ademais, o artigo aborda o processamento de dados na IoT, destacando sua dependência das necessidades da aplicação. Ele explica que o fog computing e o edge computing oferecem processamento próximo à origem dos dados, enquanto o cloud computing envia dados para centros remotos. Além disso, a computação distribuída é mencionada como uma estratégia que divide dados para processamento eficiente. O foco principal dessas abordagens é reduzir a carga na rede, acelerar o processamento e economizar energia. O artigo também explora as cidades inteligentes, enfatizando seu impacto na qualidade de vida e serviços urbanos, incluindo gerenciamento de tráfego, água, energia e qualidade de vida. São apresentados casos de uso, ressaltando o papel crucial do processamento de dados na tomada de decisões urbanas, além das características dos dados gerados nas cidades inteligentes.
 
-Para construir o modelo, utilizamos um regressor Random Forest, uma técnica robusta de aprendizado de máquina que é conhecida por seu desempenho em tarefas de regressão. O modelo foi treinado cuidadosamente para garantir que ele seja capaz de fazer previsões precisas e confiáveis.
+Após essas explicações mais gerais o artigo trata sobre a taxonomia de algoritmos de aprendizado de máquina para análise de dados em cidades inteligentes, abrangendo aprendizado supervisionado e não supervisionado, de um modo mais 'técnico', porém conciso:
 
-Após o treinamento, o modelo foi implantado em um ambiente de API usando o FastAPI. Isso permite que os usuários interajam facilmente com o modelo, enviando seus dados e obtendo previsões instantâneas sobre seu score como cliente.
+- Classificação: K-nearest neighbors (KNN), Naive Bayes e Support Vector Machines (SVMs), destacando suas vantagens e limitações, além de mostrar aplicações que incluem previsão de tráfego e detecção de anomalias.
 
-Além disso, desenvolvemos uma interface simples para a API, tornando a experiência do usuário ainda mais intuitiva e amigável. Isso significa que os usuários podem acessar o modelo de forma conveniente e compreensível, mesmo que não tenham conhecimento técnico em aprendizado de máquina.
+- Regressão: A regressão linear, incluindo abordagens como Mínimos Quadrados Ordinários e Regressão Linear Bayesiana, é usada para prever o consumo de energia em edifícios. Além disso, a Regressão por Vetores de Suporte (SVR), uma extensão das Máquinas de Vetores de Suporte (SVM), é explorada para resolver problemas de regressão, como a previsão precisa de dados de temperatura e umidade.
 
-Para garantir que o modelo seja facilmente acessível e escalável, todo o aplicativo foi containerizado e implantado no DockerHub. Você pode acessar o aplicativo por meio do seguinte link:
+- Aprendizado de máquina: O artigo discute outras técnicas, como: Árvores de Classificação e Regressão (CART) onde explica como elas dividem o espaço de entrada em regiões e atribuem modelos de classificação ou regressão a cada região; Florestas Aleatórias (Random Forests) que envolvem a criação de múltiplas árvores treinadas em conjuntos de dados aleatórios, resultando em alta precisão, mas menor interpretabilidade e Bagging que consiste em treinar vários modelos em conjuntos de dados de treinamento gerados aleatoriamente, melhorando a estabilidade e a precisão dos modelos.
 
-[https://hub.docker.com/repository/docker/luanaparra/ponderada-sem6/general]
+- Agrupamento dos dados: As técnicas citadas incluem o K-means e DBSCAN para agrupar dados não rotulados com base na similaridade.
 
-**Como rodar**: Para executar a aplicação, `docker run -d -p 8000:8000 luanaparra/ponderada-sem6`; para acessar a aplicação web http://localhost:8000 e a documentação da API  http://localhost:8000/redoc.
-**Clonar o repositório**: `cd /caminho/para/o/seu/diretorio` e `git clone https://github.com/seu-usuario/seu-repo.git`
-**Instalar requirements(dependências)**: `pip install -r requirements.txt`
-**Rodar o ambiente de dev**: `uvicorn api:app --host 0.0.0.0 --port 8000`
+- Extração de características: O foco está em Análise de Componentes Principais - PCA para projetar dados em um subespaço de menor dimensionalidade e Análise de Correlação Canônica - CCA para encontrar subespaços correlacionados.
 
-#### Modelo
-O processo de treinamento do modelo foi detalhadamente documentado no notebook. Em resumo, começamos com a exploração dos dados, realizando análises estatísticas e criando gráficos informativos para compreender a natureza dos dados. Em seguida, aplicamos a técnica de codificação one-hot para lidar com os valores categóricos, garantindo que eles sejam apropriadamente incorporados ao modelo.
+- Redes neurais: O artigo destaca o uso de redes neurais, em particular as chamadas Feed Forward Neural Networks (FFNN) ou Multilayer Perceptrons (MLP), em aplicações de aprendizado de máquina, abordando suas vantagens e desafios.
 
-Além disso, procedemos com a normalização dos valores numéricos para garantir que todas as características tivessem um impacto justo nas previsões do modelo, evitando distorções devido à escala.
+- Análise de Dados Temporais e Sequenciais: São discutidos métodos específicos, como modelos ocultos de Markov e redes neurais recorrentes, para lidar com dados sequenciais.
 
-No estágio de treinamento, exploramos três regressores populares: Random Forest, Adaboost e KNN. Utilizamos o erro médio absoluto como métrica de avaliação de desempenho, uma medida robusta que nos permite quantificar o quão bem o modelo está fazendo suas previsões em termos de magnitude do erro.
+O artigo aborda a detecção de anomalias, que envolve identificar itens ou padrões diferentes em um conjunto de dados. Anomalias são comportamentos inesperados, como outliers, novidades ou ruídos. O artigo descreve três categorias de técnicas de detecção de anomalias: supervisionadas, semi-supervisionadas e não supervisionadas, destacando sua importância em várias aplicações práticas.
 
-Após uma análise cuidadosa, identificamos que o modelo Random Forest superou os outros dois regressores em termos de desempenho, produzindo as previsões mais precisas e confiáveis. Portanto, decidimos avançar com o Random Forest como nosso modelo final.
+Por fim, é enfatizada a importância de selecionar algoritmos de aprendizado de máquina adequados para tarefas específicas de análise de dados inteligentes. Ele sugere algoritmos apropriados para tarefas como descoberta de estrutura, detecção de anomalias, previsão de valores, previsão de categorias e extração de características, destacando a relevância da escolha adequada para melhorar o desempenho em cenários de dados inteligentes.
 
-#### API
-Para fazer uso desta API, você pode enviar uma solicitação POST para a rota /predict/ com os seguintes parâmetros em formato JSON:
+###  Comparação de técnicas utilizadas no desenvolvimento do projeto 
+No contexto do desenvolvimento do projeto para prever falhas em aeronaves, a comparação com as técnicas mencionadas no artigo é crucial para entender a escolha dos algoritmos e abordagens específicos. Enquanto o projeto utilizou algoritmos de séries temporais, alinhando-se com as necessidades de lidar com dados sequenciais e correlações temporais significativas, também incorporou uma abordagem de experimentação e teste, podendo ser exemplificado pelo uso do PyCaret, que permitiu avaliar diferentes modelos. Notavelmente, a tentativa de aplicar regressão logística, mencionada no contexto do artigo como uma das opções, não foi eficaz no contexto do projeto, ressaltando a importância de adaptar as escolhas de algoritmos à natureza específica dos dados e das metas preditivas em um determinado cenário, como aeronaves, onde a complexidade e as nuances das falhas requerem modelos mais sofisticados e adequados.
 
-1. "gender" (string): O gênero da pessoa, que deve ser especificado como "male" (masculino) ou "female" (feminino).
-2. "age" (inteiro): A idade da pessoa, que deve estar dentro do intervalo de 12 a 100 anos.
-3. "annual_income" (inteiro): A estimativa da renda anual da pessoa.
+### Resenha crítica
+O artigo apresenta uma análise abrangente e informativa sobre a intersecção entre a Internet das Coisas (IoT) e as técnicas de aprendizado de máquina, disponibilizando uma visão geral valiosa sobre o asssunto. Desse modo, destaco alguns pontos positivos e negativos: 
 
-Após o envio da solicitação, a API processará os dados e retornará uma resposta em formato JSON contendo a previsão da renda anual com base nas informações fornecidas.
+Pontos positivos:
+1. Abrangência e estrutura: O artigo possui uma estrutura bem definida, de fácil entendimento/interpretação e completa, fazendo uma revisão sobre IoT e mineração dos dados até a exploração de uma ampla variedade algoritmos de machine learning.
+2. Contextualização significativa: O artigo retrata a importância da IoT no cenário mais atual, destacando seu papel em áreas como cidades inteligentes, saúde e agricultura, o que fornece um contexto relevante para os leitores e mostra as implicações práticas dessas tecnologias.
+3. Algoritmos: O artigo fornece uma ampla gama de algoritmos de aprendizado de máquina, o que é valioso para os leitores interessados em explorar diferentes técnicas, além de realizar uma visão sobre as opções disponíveis para a análise de dados da IoT. 
+
+Pontos Negativos:
+1. Falta de estudos de caso práticos: Apesar do artigo tratar sobre aplicaçõe da IoT, como cidades inteligentes e saúde, a ausência de estudos de caso específicos reais limita a compreensão de como essas técnicas são implementadas na prática.
+2. Superficialidade: Acredito que o artigo poderia ter tratado alguma técnicas com uma maior profundidade, como é o caso da regressão logística.
+
+Dessa maneira, no projeto de desenvolvimento do modelo preditivo para prever falhas em aeronaves foram testadas diversas abordagens, incluindo algoritmos de séries temporais e a regressão logística mencionada no artigo. A dificuldade em obter resultados satisfatórios com a regressão logística, o primeiro algoritmo escolhido para o desenvolvimento, ressalta a importância de escolher os algoritmos corretos para tarefas específicas. Dessa maneira, essa experiência do projeto se alinha com a ênfase do artigo na importância de adaptar as escolhas de algoritmos à natureza dos dados e às metas preditivas. Portanto, o artigo oferece informações valiosas que podem ser aplicadas no contexto do projeto, especialmente em relação à seleção de algoritmos adequados para análise de dados sequenciais e preditivos, no nosso caso optamos por seguir com séries temporais.
